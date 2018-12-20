@@ -1,0 +1,88 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters" : {
+    "VPCID" : {
+      "Description" : "VPCID of BIDev DW",
+      "Type" : "String",
+      "Default" : "vpc-04a8fd3ff2c492ce4"
+    },
+    "SubnetID1" : {
+      "Description" : "SubnetID1",
+      "Type" : "String",
+      "Default" : "subnet-0eaff80930488fe14"
+    },
+    "SubnetID2" : {
+      "Description" : "SubnetID2",
+      "Type" : "String",
+      "Default" : "subnet-09657450de0bd915a"
+    },
+    "InboundTraffic" : {
+      "Description" : "Allow inbound traffic to the cluster from this CIDR range.",
+      "Type" : "String",
+      "MinLength": "9",
+      "MaxLength": "18",
+      "Default" : "59.125.160.145/32",
+      "AllowedPattern" : "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
+      "ConstraintDescription" : "must be a valid CIDR range of the form x.x.x.x/x."
+    },
+    "PortNumber" : {
+      "Description" : "The port number on which the cluster accepts incoming connections.",
+      "Type" : "Number",
+      "Default" : "5439"
+    }
+  },
+  "Resources": {
+    "rscluawsredshiftdev1": {
+        "Type": "AWS::Redshift::Cluster",
+        "Properties": {
+          "AllowVersionUpgrade": "true",
+          "AutomatedSnapshotRetentionPeriod": "1",
+          "ClusterIdentifier" : "mybidev-redshift-01",
+          "ClusterType": "multi-node",
+          "ClusterVersion": "1.0",
+          "DBName": "inst1",
+          "MasterUsername": "devmgadba",
+          "MasterUserPassword": "D15c0v3rdba321v",
+          "NodeType": "dc2.large",
+          "NumberOfNodes": 2,
+          "Port": "5439",
+          "PubliclyAccessible": "true",
+          "PreferredMaintenanceWindow": "tue:16:30-tue:17:00",
+          "ClusterSubnetGroupName": {
+            "Ref": "clusubnetredshiftclustersubnetgroup"
+          },
+          "VpcSecurityGroupIds": [
+            {
+              "Ref": "SecurityGroup"
+            }
+          ]
+        }
+    },
+    "clusubnetredshiftclustersubnetgroup": {
+       "Type": "AWS::Redshift::ClusterSubnetGroup",
+       "Properties": {
+         "Description": "Test Redshift DW cluster subnet group",
+         "SubnetIds": [
+                        {"Ref": "SubnetID1"
+                        },
+                        {"Ref": "SubnetID2"
+                        }
+                      ]
+       }
+    },
+    "SecurityGroup" : {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "Security group",
+        "SecurityGroupIngress" : [ {
+          "CidrIp" : { "Ref": "InboundTraffic" },
+          "FromPort" : { "Ref" : "PortNumber" },
+          "ToPort" : { "Ref" : "PortNumber" },
+          "IpProtocol" : "tcp"
+          } ],
+        "VpcId" : { "Ref" : "VPCID" }
+      }
+    }
+  },
+  "Description": "Dev DW stack created by Python"
+}
