@@ -1,0 +1,244 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "tablecfgcontroller": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "key",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "cfg_controller",
+        "KeySchema": [
+          {
+            "AttributeName": "key",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    },
+    "tablemetadata": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "DataSourceID",
+            "AttributeType": "N"
+          },
+          {
+            "AttributeName": "DataSourceName",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "meta_data",
+        "KeySchema": [
+          {
+            "AttributeName": "DataSourceID",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "DataSourceName",
+            "KeyType": "RANGE"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    },
+    "tables32process": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "datasource",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "s3_key",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "s3_2process",
+        "KeySchema": [
+          {
+            "AttributeName": "datasource",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "s3_key",
+            "KeyType": "RANGE"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    },
+    "tables3processed": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "datasource-date",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "s3_key",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "s3_processed",
+        "KeySchema": [
+          {
+            "AttributeName": "datasource-date",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "s3_key",
+            "KeyType": "RANGE"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    },
+    "tabletestdatasourcerowcount": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "count_timestamp",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "datasource_name",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "test-datasource_rowcount",
+        "KeySchema": [
+          {
+            "AttributeName": "datasource_name",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "count_timestamp",
+            "KeyType": "RANGE"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    },
+    "tabletestgluedatabases": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "databasename",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "test-glue_databases",
+        "KeySchema": [
+          {
+            "AttributeName": "databasename",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    },
+    "tabletestrides": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "RidesId",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "test-rides",
+        "KeySchema": [
+          {
+            "AttributeName": "RidesId",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    },
+    "tabletesttableschema": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "table_name",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "test-table_schema",
+        "KeySchema": [
+          {
+            "AttributeName": "table_name",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    },
+    "tabletestvvstable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "pk",
+            "AttributeType": "S"
+          },
+          {
+            "AttributeName": "sk",
+            "AttributeType": "S"
+          }
+        ],
+        "TableName": "test_vvs_table",
+        "KeySchema": [
+          {
+            "AttributeName": "pk",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "sk",
+            "KeyType": "RANGE"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": "5",
+          "WriteCapacityUnits": "5"
+        }
+      }
+    }
+  },
+  "Description": "Dev env. Component - DynamoDB tables creation using Python."
+}

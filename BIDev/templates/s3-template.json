@@ -1,0 +1,82 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "s3devbdaccesslogs": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+	    "BucketName" : "devdbaccesslogs",
+        "AccessControl": "LogDeliveryWrite",
+        "VersioningConfiguration": {
+          "Status": "Suspended"
+        }
+      }
+    },
+    "s3devbigdata001": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+	    "BucketName" : "devbigdata001", 
+        "AccessControl": "Private",
+        "LoggingConfiguration": {
+          "DestinationBucketName": {
+            "Ref": "s3devbdaccesslogs"
+          },
+          "LogFilePrefix": "devbigdata001/"
+        },
+        "VersioningConfiguration": {
+          "Status": "Suspended"
+        },
+        "Tags": [
+          {
+            "Key": "Type",
+            "Value": "BIDev"
+          },
+          {
+            "Key": "DataCenter",
+            "Value": "TNG"
+          },
+          {
+            "Key": "Ops",
+            "Value": "POC"
+          }
+        ]
+      }
+    },
+    "s3devbigdata002": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+	    "BucketName" : "devbigdata002",
+        "AccessControl": "Private",
+		"LoggingConfiguration": {
+          "DestinationBucketName": {
+            "Ref": "s3devbdaccesslogs"
+          },
+          "LogFilePrefix": "devbigdata002/"
+        },
+		"VersioningConfiguration": {
+          "Status": "Suspended"
+        }
+      }
+    },
+    "s3devbiportal": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+	    "BucketName" : "devbiportal", 
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html",
+          "ErrorDocument": "error.html"
+        },
+        "AccessControl": "PublicRead",
+        "LoggingConfiguration": {
+          "DestinationBucketName": {
+            "Ref": "s3devbdaccesslogs"
+          },
+          "LogFilePrefix": "devbiportal/"
+        },
+        "VersioningConfiguration": {
+          "Status": "Suspended"
+        }
+      }
+    }
+  }, 
+  "Description": "Dev DW S3 bucket created by Python"
+}
