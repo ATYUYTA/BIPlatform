@@ -1,0 +1,66 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "s3testdbaccesslogs": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName" : "testdbaccesslogs",
+        "AccessControl": "LogDeliveryWrite",
+        "VersioningConfiguration": {
+          "Status": "Suspended"
+        }
+      }
+    },
+    "s3testbigdata001": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName" : "testbigdata001",
+        "AccessControl": "Private",
+        "LoggingConfiguration": {
+          "DestinationBucketName": {
+            "Ref": "s3testdbaccesslogs"
+          },
+          "LogFilePrefix": "testbigdata001/"
+        },
+        "VersioningConfiguration": {
+          "Status": "Suspended"
+        },
+        "Tags": [
+          {
+            "Key": "Type",
+            "Value": "BITesting"
+          },
+          {
+            "Key": "DataCenter",
+            "Value": "TNG"
+          },
+          {
+            "Key": "Ops",
+            "Value": "POC"
+          }
+        ]
+      }
+    },
+    "s3testbiportal": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName" : "testbiportal",
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html",
+          "ErrorDocument": "error.html"
+        },
+        "AccessControl": "PublicRead",
+        "LoggingConfiguration": {
+          "DestinationBucketName": {
+            "Ref": "s3testdbaccesslogs"
+          },
+          "LogFilePrefix": "testbiportal/"
+        },
+        "VersioningConfiguration": {
+          "Status": "Suspended"
+        }
+      }
+    }
+  }, 
+  "Description": "Create Testing DW S3 stack created by Python Script."
+}
