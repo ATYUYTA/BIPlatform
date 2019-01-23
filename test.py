@@ -23,7 +23,7 @@ lastest_commit = ""
 '''
 Get last time git commit
 '''
-pkl_file = open(last_git_commit_file, 'r')
+pkl_file = open(last_git_commit_file, 'rb')
 last_commit = pickle.load(pkl_file)
 
 print("Last Time Git Commit:")
