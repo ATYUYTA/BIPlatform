@@ -23,7 +23,7 @@ lastest_commit = ""
 '''
 Get last time git commit
 '''
-pkl_file = open(last_git_commit_file, 'rb')
+pkl_file = open(last_git_commit_file, 'r')
 last_commit = pickle.load(pkl_file)
 
 print("Last Time Git Commit:")
@@ -75,6 +75,4 @@ if lastest_commit != last_commit:
 			pprint.pprint(result)
 else:
     print("No any change.")
-
-a="test"
 
