@@ -15,7 +15,7 @@ import pytz
 
 
 current_path = os.sep.join(os.getcwd().split(os.sep))
-last_git_commit_file = current_path + "/test.txt"
+last_git_commit_file = "D:/test.txt"
 
 last_commit = ""
 lastest_commit = ""
