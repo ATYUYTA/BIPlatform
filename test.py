@@ -59,20 +59,21 @@ if lastest_commit != last_commit:
 			print("what_change: %s" % what_change)
 			print("which_env: %s" % which_env)
 			print("which_component: %s" % which_component)
-			
+			cmd = "copy %s\%s src\%s" % (which_env,which_component,which_component)
+			os.popen(cmd).readlines()
 			'''
 			Create Stack
 			'''
-			stack_name = "mystack-%s-" % which_component
-			stack_name += datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y%m%d%H%M%S")
-			template_body = "file://%s/%s/templates/%s-template.json" % (current_path, which_env, which_component)
-			cmd = "aws --profile %s cloudformation create-stack --stack-name %s --template-body %s" % \
-						(which_env, stack_name, template_body)
+			#stack_name = "mystack-%s-" % which_component
+			#stack_name += datetime.datetime.now(pytz.timezone('Asia/Taipei')).strftime("%Y%m%d%H%M%S")
+			#template_body = "file://%s/%s/templates/%s-template.json" % (current_path, which_env, which_component)
+			#cmd = "aws --profile %s cloudformation create-stack --stack-name %s --template-body %s" % \
+			#			(which_env, stack_name, template_body)
             
-			print("CloudFormation cmd: %s" % cmd)
-			result = os.popen(cmd).readlines()
-			print("Create Stack: %s, %s" % (which_env, stack_name))
-			pprint.pprint(result)
+			#print("CloudFormation cmd: %s" % cmd)
+			#result = os.popen(cmd).readlines()
+			#print("Create Stack: %s, %s" % (which_env, stack_name))
+			#pprint.pprint(result)
 else:
     print("No any change.")
 
