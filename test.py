@@ -43,9 +43,6 @@ pprint.pprint(lastest_commit)
 output = open(last_git_commit_file, 'wb')
 pickle.dump(lastest_commit, output)
 output.close()
-lastest_commit = '9e71e58bbee109cfb1d68043cb4e722b2017b944'
-last_commit = '9a93cb565a1f56d556eed3901b7547a16aef6ca4'
-
 
 if lastest_commit != last_commit:
 	cmd = "cd %s && git diff %s %s | findstr /b diff" % (current_path, lastest_commit, last_commit)
