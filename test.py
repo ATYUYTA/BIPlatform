@@ -8,7 +8,7 @@ import datetime
 import pprint
 
 
-cmd = "python -m pip install pytz"
+cmd = "C:\Python36\python.exe -m pip install pytz"
 os.popen(cmd).readlines()
 import pytz
 
