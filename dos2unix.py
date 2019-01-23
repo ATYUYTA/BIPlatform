@@ -17,6 +17,6 @@ with open(sys.argv[1], 'rb') as infile:
 with open(sys.argv[2], 'wb') as output:
   for line in content.splitlines():
     outsize += len(line) + 1
-    output.write(line + '\n')
+    output.write(line + b'\n')
 
 print("Done. Saved %s bytes." % (len(content)-outsize))
