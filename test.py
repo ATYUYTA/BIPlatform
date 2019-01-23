@@ -60,7 +60,10 @@ if lastest_commit != last_commit:
 			print("which_env: %s" % which_env)
 			print("which_component: %s" % which_component)
 			cmd = "copy %s\%s src\%s" % (which_env,which_component,which_component)
-			os.popen(cmd).readlines()
+			print('--------------------------')
+			print(cmd)
+			result = os.popen(cmd).readlines()
+			print(result)
 			'''
 			Create Stack
 			'''
