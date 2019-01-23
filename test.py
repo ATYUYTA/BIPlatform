@@ -45,7 +45,7 @@ pickle.dump(lastest_commit, output)
 output.close()
 
 if lastest_commit != last_commit:
-	cmd = "cd %s && git diff %s %s | findstr /b diff" % (current_path, lastest_commit, last_commit)
+	cmd = "git diff %s %s | findstr /b diff" % (lastest_commit, last_commit)
 	print(cmd)
 	result = os.popen(cmd).readlines()
 	pprint.pprint(result)
