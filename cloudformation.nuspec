@@ -12,6 +12,6 @@
         <tags>cloudformation</tags>
     </metadata>
     <files>
-        <file src="src\**" target="*.*" />
+        <file src="src\**" target="*" />
     </files>
 </package>
