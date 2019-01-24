@@ -80,7 +80,7 @@
           "ToPort" : { "Ref" : "PortNumber" },
           "IpProtocol" : "tcp"
           } ],
-        "VpcId" : { "Ref" : "VPCID" }
+        "VpcId" : { "Ref" : "VPCIDa" }
       }
     }
   },
