@@ -2,7 +2,7 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters" : {
     "VPCID" : {
-      "Description" : "VPCID of BIDev DW! ",
+      "Description" : "VPCID of BIDev DW!",
       "Type" : "String",
       "Default" : "vpc-0ec5649e0e7dfd788"
     },
